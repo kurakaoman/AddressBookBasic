@@ -18,7 +18,7 @@ public class AddressBook {
         Scanner czytnik = new Scanner(System.in);
         ContactList contactList = new ContactList();
 
-        System.out.println("Witajw multimedialnej książce adresowej Marcin Szpaka Addres book" +
+        System.out.println("Witaj w multimedialnej książce adresowej Marcina Szpaka Addres book" +
         "wydaj dyspozyje:" +
         System.lineSeparator() + "1) wyświetl listę kontaktów" +
         System.lineSeparator() + "2) wyświetl kontakt" +
