@@ -1,6 +1,6 @@
 package step1A;
 
-import step0Conspectus.*;
+import step1A.contactList.SortList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +13,13 @@ public class ContactList {
     public ContactList() {
         //!!!!!!!!!!!!!! Daj tu obsluge wyjatku.. ktoa moglby np chcec wyświetlić kontakt o numerze rzekraczajacym faktyczny rozmar mapy
         // do każdej metody dodaj na koncu SortList!!!
-        // rozwiaz problem z wyswieltalniem tego kontaktu który właśnie utworzyliśmy ( jego numeru porzadkowego na liście... może poprzez nie equals a == (?), narazie masz rozwiazanie tymczasowe, bedzie się kopać jak uporzadkujeszliste , tzn zmieni swoja pozycje na liście
+        //-sprawdz czy dziala- rozwiaz problem z wyswieltalniem tego kontaktu który właśnie utworzyliśmy ( jego numeru porzadkowego na liście... może poprzez nie equals a == (?), narazie masz rozwiazanie tymczasowe, bedzie się kopać jak uporzadkujeszliste , tzn zmieni swoja pozycje na liście
         //On napewno bierze metode edit ze stepa 1 A w AdressBook ... i pozosdtałe metody?, nie rozuemim dla czego tak i jak sobie z tym radzić , możliwe że źle przekopiowąłem to wszystko bo używałem Refactor/Copy...
         //zmien nazwe mapy contactList
     }
 
     public Map<Integer, Parameters> contactList = new HashMap<>();
+    public SortList sortList = new SortList()
 
     private void sortList(){
 
@@ -35,7 +36,7 @@ public class ContactList {
                     "Ulica: " + contactList.get(i).getStreet() + "  " +
                     "Nr telefonu: " + contactList.get(i).getPhoneNumber());
         }
-        sortList();
+        sortList.selectionSort(contactList);
     }
 
     public void showContact(Integer positionAtList, String name, String surname) {
@@ -54,7 +55,8 @@ public class ContactList {
     }
 
     public void addContact(String name, String surname, String country, String postalCode, String city, String streat, String phoneNumber) {
-        contactList.put(contactList.size(), new Parameters(name, surname, country, postalCode, city, streat, phoneNumber));
+        Parameters parametersTemp = new Parameters(name, surname, country, postalCode, city, streat, phoneNumber)
+        contactList.put(contactList.size(), parametersTemp);
         System.out.println(contactList.size() + ") Imię: " + contactList.get(contactList.size()).getName() + "   " +
                 "Nazwisko: " + contactList.get(contactList.size()).getSurname() + "  " +
                 "Kraj: " + contactList.get(contactList.size()).getCountry() + "  " +
@@ -62,6 +64,19 @@ public class ContactList {
                 "Miasto: " + contactList.get(contactList.size()).getCity() + "  " +
                 "Ulica: " + contactList.get(contactList.size()).getStreet() + "  " +
                 "Nr telefonu: " + contactList.get(contactList.size()).getPhoneNumber());
+        sortList();
+        for(int i = 0; i < contactList.size(); i++){
+            if(contactList.get(i)==parametersTemp){
+                System.out.println(i + ") Imię: " + contactList.get(i).getName() + "   " +
+                "Nazwisko: " + contactList.get(i).getSurname() + "  " +
+                "Kraj: " + contactList.get(i).getCountry() + "  " +
+                "Kod pocztowy: " + contactList.get(i).getPostalCode() + "  " +
+                "Miasto: " + contactList.get(i).getCity() + "  " +
+                "Ulica: " + contactList.get(i).getStreet() + "  " +
+                "Nr telefonu: " + contactList.get(i).getPhoneNumber());
+            }
+        }
+
     }
 
     public void erazeContact(Integer positionAtList, String name, String surname) {
