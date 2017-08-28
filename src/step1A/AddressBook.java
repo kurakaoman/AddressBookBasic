@@ -1,6 +1,6 @@
 package step1A;
 
-import step0Conspectus.ContactList;
+import step1A.ContactList;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -24,16 +24,20 @@ public class AddressBook {
         System.lineSeparator() + "2) wyświetl kontakt" +
         System.lineSeparator() + "3) dodaj kontakt" +
         System.lineSeparator() + "4) usuń kontakt" +
-        System.lineSeparator() + "5) edytuj kontakt");
+        System.lineSeparator() + "5) edytuj kontakt" +
+        System.lineSeparator() + "6) Wyjdź");
+
 
         String scan = czytnik.nextLine();
         try {
-            if(!scan.equals("1") && !scan.equals("2") && !scan.equals("3") && !scan.equals("4") && !scan.equals("5")) {
+            if(!scan.equals("1") && !scan.equals("2") && !scan.equals("3") && !scan.equals("4") && !scan.equals("5") && !scan.equals("6")) {
                 System.out.println("nie prawidłowy numer akcji!" +
                 System.lineSeparator() + "sprubój jeszcze raz");
+                run();
             }
             if(scan.equals("1")){
                 contactList.showContactList();
+                run();
                 //System.out.println("Tu masz zawołać metodę która wyświetli listę w odpowiedni sposób");
             }
             if(scan.equals("2")) {
@@ -44,6 +48,7 @@ public class AddressBook {
                 System.out.println("Podaj Nazwisko kontaktu:" + System.lineSeparator());
                 String surname = czytnik.nextLine();
                 contactList.showContact(poz, name, surname);
+                run();
                 //System.out.println("Tu masz zawołać metodę która wyświetli wybrany kontakt ");
             }
             if(scan.equals("3")) {
@@ -63,6 +68,7 @@ public class AddressBook {
                 System.out.println("Podaj nr telefonu:" + System.lineSeparator());
                 String phoneNumber = czytnik.nextLine();
                 contactList.addContact(name, surname, country, postalCode, city, street, phoneNumber);
+                run();
                 //System.out.println("Tu masz zawołać metodę która dopisze nowy kontakt do listy i wyświetli Urzytkownik XXX został dopisany do listy ");
             }
             if(scan.equals("4")) {
@@ -73,6 +79,7 @@ public class AddressBook {
                 System.out.println("Podaj Nazwisko kontaktu:" + System.lineSeparator());
                 String surname = czytnik.nextLine();
                 contactList.erazeContact(poz, name, surname);
+                run();
                 //System.out.println("Tu masz zawołać metodę która usunie wybrany kontakt z listy i wyświetli Urzytkownik XXX został Usunięty ");
             }
             if(scan.equals("5")) {
@@ -93,12 +100,22 @@ public class AddressBook {
                 String street = czytnik.nextLine();
                 System.out.println("Podaj nr telefonu:" + System.lineSeparator());
                 String phoneNumber = czytnik.nextLine();
-                contactList.editContact(poz, name, surname, country, postalCode, city, street, phoneNumber);   // Czy on napewno bierze metode edit ze stepa 1 A ??
+                contactList.editContact(poz, name, surname, country, postalCode, city, street, phoneNumber);
+                run();
+                // Czy on napewno bierze metode edit ze stepa 1 A ??
                 //System.out.println("Tu masz zawołać metodę która edytuje wybrany kontakt i wyświetli Urzytkownik XXX został zmodyfikowany ");
             }
+            if(scan.equals("6")) {
+                System.out.println("Do widzenia ;-)");
+            }
         } catch(InputMismatchException ime) {
-            System.out.println("Wprowadziłeś niepoprawną wartość. należy wprowadzić cyfrę od 1 do... odpowiadającą wybranej akcji" +
+            System.out.println("Wprowadziłeś niepoprawną wartość. należy wprowadzić cyfrę od 1 do 5 odpowiadającą wybranej akcji" +
             System.lineSeparator() + "sprubój ponownie");
+            run();
+        } catch(NullPointerException npe) {
+            System.out.println("nie ma takiego" +
+                    System.lineSeparator() + "sprubój ponownie");
+            run();
         }
     }
 }

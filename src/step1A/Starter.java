@@ -1,6 +1,6 @@
 package step1A;
 
-import step0Conspectus.AddressBook;
+import step1A.AddressBook;
 
 /**
  * Created by Szpak on 25.08.2017.
