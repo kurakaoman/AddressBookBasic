@@ -20,6 +20,7 @@ public class Parameters {
         this.city = city;
         this.street = street;
         this.phoneNumber = phoneNumber;
+        System.out.println("melduje się new Parameter !");
     }
 
     public String getName(){
