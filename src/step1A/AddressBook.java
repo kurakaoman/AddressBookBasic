@@ -2,9 +2,7 @@ package step1A;
 
 import step1A.ContactList;
 
-import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
 
 
@@ -23,8 +21,6 @@ public class AddressBook {
         start(czytnik,contactList);
     }
     public void start(Scanner czytnik, ContactList contactList){
-        Map<Integer,Integer> testMap = new HashMap<>();
-        System.out.println("w mapie testMap s trzy elementy na pozycjach 0, 1 ,2 rozmiar Mapy to" + testMap.size());
         System.out.println("Witaj w multimedialnej książce adresowej Marcina Szpaka Addres book" +
         "wydaj dyspozyje:" +
         System.lineSeparator() + "1) wyświetl listę kontaktów" +
@@ -42,21 +38,14 @@ public class AddressBook {
                 System.lineSeparator() + "sprubój jeszcze raz");
                 start(czytnik,contactList);
             }
-            try {
             if(scan.equals("1")){
                 contactList.showContactList();
                 start(czytnik,contactList);
-
-                //System.out.println("Tu masz zawołać metodę która wyświetli listę w odpowiedni sposób");
             }
-                }catch(NullPointerException npeList) {
-                System.out.println("Lista jest pusta, najpierw wprowadź kontakty do listy");
-                start(czytnik,contactList);
-            }
-            try {
             if(scan.equals("2")) {
                 System.out.println("Podaj pozycję którą według listy zajmuje żądany przez Ciebie kontakt:" + System.lineSeparator());
                 Integer poz = czytnik.nextInt();
+                String buffor = czytnik.nextLine();
                 System.out.println("Podaj Imię kontaktu:" + System.lineSeparator());
                 String name = czytnik.nextLine();
                 System.out.println("Podaj Nazwisko kontaktu:" + System.lineSeparator());
@@ -65,11 +54,6 @@ public class AddressBook {
                 start(czytnik,contactList);
 
                 //System.out.println("Tu masz zawołać metodę która wyświetli wybrany kontakt ");
-            }
-            }catch(NullPointerException npeList) {
-                System.out.println("ta pozycja na liscie jest jeszcze pusta");
-                start(czytnik, contactList);
-                start(czytnik,contactList);
             }
             if(scan.equals("3")) {
                 System.out.println("Podaj Imię kontaktu:" + System.lineSeparator());
@@ -94,6 +78,7 @@ public class AddressBook {
             if(scan.equals("4")) {
                 System.out.println("Podaj pozycję którą według listy zajmuje żądany przez Ciebie kontakt:" + System.lineSeparator());
                 Integer poz = czytnik.nextInt();
+                String buffor = czytnik.nextLine();
                 System.out.println("Podaj Imię kontaktu:" + System.lineSeparator());
                 String name = czytnik.nextLine();
                 System.out.println("Podaj Nazwisko kontaktu:" + System.lineSeparator());
@@ -105,6 +90,7 @@ public class AddressBook {
             if(scan.equals("5")) {
                 System.out.println("Podaj pozycję którą według listy zajmuje żądany przez Ciebie kontakt:" + System.lineSeparator());
                 Integer poz = czytnik.nextInt();
+                String buffor = czytnik.nextLine();
                 System.out.println("Podaj Imię kontaktu:" + System.lineSeparator());
                 String name = czytnik.nextLine();
                 System.out.println("Podaj Nazwisko kontaktu:" + System.lineSeparator());
@@ -131,10 +117,6 @@ public class AddressBook {
         } catch(InputMismatchException ime) {
             System.out.println("Wprowadziłeś niepoprawną wartość. należy wprowadzić cyfrę od 1 do 5 odpowiadającą wybranej akcji" +
             System.lineSeparator() + "sprubój ponownie");
-            start(czytnik,contactList);
-        } catch(NullPointerException npe) {
-            System.out.println("nie ma takiego" +
-                    System.lineSeparator() + "sprubój ponownie");
             start(czytnik,contactList);
         }
     }
