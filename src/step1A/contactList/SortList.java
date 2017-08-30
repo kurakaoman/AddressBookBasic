@@ -12,7 +12,10 @@ public class SortList {
 
     public Map<Character,Integer> alphabeticOrder = new HashMap<>();
 
-    private void SelectionSort() {
+    public void SortList(){
+
+        System.out.println("melduje się SortList! gotów do akcji");
+
         alphabeticOrder.put('0',0);
         alphabeticOrder.remove(0);
         alphabeticOrder.put('_',1);

@@ -1,5 +1,6 @@
 package step1A;
 
+
 import step1A.contactList.SortList;
 
 import java.util.HashMap;
@@ -24,7 +25,6 @@ public class ContactList {
     public SortList sortList = new SortList();
     public Integer lastPosition = contactMap.size() - 1;
     public Parameters lastParameter = contactMap.get(lastPosition);
-    public Parameters firstParameter = contactMap.get(0);
 
 
     public void showContactList() {
