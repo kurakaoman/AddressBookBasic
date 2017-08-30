@@ -1,6 +1,6 @@
 package step1A.contactList;
 
-import step1A.Parameters;
+import step1A.Person;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class SortList {
 
     public Map<Character,Integer> alphabeticOrder = new HashMap<>();
 
-    public void SortList(){
+    public SortList(){
 
         System.out.println("melduje się SortList! gotów do akcji");
 
@@ -81,7 +81,7 @@ public class SortList {
         alphabeticOrder.put('K',61);
         alphabeticOrder.put('k',62);
         alphabeticOrder.put('L',63);
-        alphabeticOrder.put('L',64);
+        alphabeticOrder.put('l',64);
         alphabeticOrder.put('Ł',65);
         alphabeticOrder.put('ł',66);
         alphabeticOrder.put('M',67);
@@ -128,48 +128,60 @@ public class SortList {
 
     }
 
-    public void selectionSort(Map<Integer, Parameters> mapToSort) {
+    public void selectionSort(Map<Integer, Person> mapToSort) {
 
-            for (int a = 0; a < mapToSort.size(); a++) {
+            for (int firstElementIndex = 0; firstElementIndex < mapToSort.size(); firstElementIndex++) {
                 int z = 0;
-                int max = 0;
-                Parameters paramTemp = mapToSort.get(0);
+                int min = 0;
+                Person paramTemp = mapToSort.get(0);
                 System.out.println("");
-                System.out.println("===>    a =" + a);
-                for (int i = a; i < mapToSort.size(); i++) {
-                    System.out.println("i=" + i);
+                System.out.println("===>    a =" + firstElementIndex);
+                for (int secondElementIndex = firstElementIndex; secondElementIndex < mapToSort.size(); secondElementIndex++) {
+                    System.out.println("i=" + secondElementIndex);
                    // for(int y = 0; y < mapToSort.get(a).getName().length(); y++)
-                    if (i == a) {
-                        max = alphabeticOrder.get(mapToSort.get(a).getName().charAt(1));
-                        z = a;
-                        paramTemp = mapToSort.get(a);
+                    String firstElementName = mapToSort.get(firstElementIndex).getName();
+                    if (secondElementIndex == firstElementIndex) {
+                        min = alphabeticOrder.get(firstElementName.charAt(0));
+                        z = firstElementIndex;
+                        paramTemp = mapToSort.get(firstElementIndex);
                     }
-                    if (alphabeticOrder.get(mapToSort.get(i).getName().charAt(1)) > max) {
-                        max = alphabeticOrder.get(mapToSort.get(i).getName().charAt(1));
-                        z = i;
-                        paramTemp = mapToSort.get(i);
-                        System.out.println("max=" + max);
+                    String secondElementName = mapToSort.get(secondElementIndex).getName();
+                    if (alphabeticOrder.get(secondElementName.charAt(0)) < min) {
+                        min = alphabeticOrder.get(secondElementName.charAt(0));
+                        z = secondElementIndex;
+                        paramTemp = mapToSort.get(secondElementIndex);
+                        System.out.println("min=" + min);
                         System.out.println("z=" + z);
                         System.out.println("paramTemp" + paramTemp);
                     }
-                    if (alphabeticOrder.get(mapToSort.get(i).getName().charAt(1)).equals(max)){
-                        for(int b = 0; b < mapToSort.get(a).getName().length(); b++){
-                            if(!(alphabeticOrder.get(mapToSort.get(z).getName().charAt(b)).equals(alphabeticOrder.get(mapToSort.get(a).getName().charAt(b))))){
-                                b = mapToSort.get(a).getName().length();
-                                if (alphabeticOrder.get(mapToSort.get(z).getName().charAt(b)) > alphabeticOrder.get(mapToSort.get(a).getName().charAt(b))){
-                                    max = alphabeticOrder.get(mapToSort.get(i).getName().charAt(1));
-                                    z = i;
-                                    paramTemp = mapToSort.get(i);
+                    if (alphabeticOrder.get(secondElementName.charAt(0)).equals(min)){
+                        for(int charIndex = 0; charIndex < secondElementName.length(); charIndex++){
+                            if( charIndex >= mapToSort.get(z).getName().length()){
+                                break;
+                            }
+                            char minParameterCharAtIndex = mapToSort.get(z).getName().charAt(charIndex);
+                            char secondParameterCharAtIndex = secondElementName.charAt(charIndex);
+                            if(!(alphabeticOrder.get(minParameterCharAtIndex).equals(alphabeticOrder.get(secondParameterCharAtIndex)))){
+
+                                if (alphabeticOrder.get(minParameterCharAtIndex) > alphabeticOrder.get(secondParameterCharAtIndex)){
+                                    min = alphabeticOrder.get(secondElementName.charAt(0));
+                                    z = secondElementIndex;
+                                    paramTemp = mapToSort.get(secondElementIndex);
                                 }
+                                break;
                             }
                         }
                     }
                 }
-                mapToSort.put(z,mapToSort.get(a));//.replace?
-                mapToSort.put(a,paramTemp);//replace
+                System.out.println("======> z =" + z);
+                System.out.println("======> firstElementIndex =" + firstElementIndex);
+                System.out.println("======> paramTempName =" + paramTemp.getName());
+                System.out.println("======> mapToSort.get(firstElementIndex) =" + mapToSort.get(firstElementIndex).getName());
+                mapToSort.put(z,mapToSort.get(firstElementIndex));//.replace?
+                mapToSort.put(firstElementIndex,paramTemp);//replace
 
                 System.out.println("mapToSort.get(z)= " + mapToSort.get(z));
-                System.out.println("mapToSort.get(a)= " + mapToSort.get(a));
+                System.out.println("mapToSort.get(a)= " + mapToSort.get(firstElementIndex));
             }
             System.out.print("mapToSort = ");
             for (int i = 0; i < mapToSort.size(); i++)

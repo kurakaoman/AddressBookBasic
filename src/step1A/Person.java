@@ -3,7 +3,7 @@ package step1A;
 /**
  * Created by Szpak on 25.08.2017.
  */
-public class Parameters {
+public class Person {
     private String name;
     private String surname;
     private String country;
@@ -12,7 +12,7 @@ public class Parameters {
     private String street;
     private String phoneNumber;
 
-    public Parameters(String name, String surname, String country, String postal_Code, String city, String street, String phoneNumber) {
+    public Person(String name, String surname, String country, String postal_Code, String city, String street, String phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.country = country;

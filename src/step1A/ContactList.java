@@ -21,10 +21,8 @@ public class ContactList {
         //-zmien nazwe mapy contactMap
     }
 
-    public Map<Integer, Parameters> contactMap = new HashMap<>();
+    public Map<Integer, Person> contactMap = new HashMap<>();
     public SortList sortList = new SortList();
-    public Integer lastPosition = contactMap.size() - 1;
-    public Parameters lastParameter = contactMap.get(lastPosition);
 
 
     public void showContactList() {
@@ -34,13 +32,7 @@ public class ContactList {
         } else {
             for (int i = 0; i < contactMap.size(); i++) {
 
-                System.out.println(i + ") Imię: " + contactMap.get(i).getName() + "   " +
-                        "Nazwisko: " + contactMap.get(i).getSurname() + "  " +
-                        "Kraj: " + contactMap.get(i).getCountry() + "  " +
-                        "Kod pocztowy: " + contactMap.get(i).getPostalCode() + "  " +
-                        "Miasto: " + contactMap.get(i).getCity() + "  " +
-                        "Ulica: " + contactMap.get(i).getStreet() + "  " +
-                        "Nr telefonu: " + contactMap.get(i).getPhoneNumber());
+                printContact(i, contactMap.get(i));
             }
         }
     }
@@ -48,13 +40,7 @@ public class ContactList {
     public void showContact(Integer positionAtList, String name, String surname) {
         sortList.selectionSort(contactMap);
         if (contactMap.get(positionAtList).getName().equals(name) && contactMap.get(positionAtList).getSurname().equals(surname)) {
-            System.out.println(positionAtList + ") Imię: " + contactMap.get(positionAtList).getName() + "   " +
-                    "Nazwisko: " + contactMap.get(positionAtList).getSurname() + "  " +
-                    "Kraj: " + contactMap.get(positionAtList).getCountry() + "  " +
-                    "Kod pocztowy: " + contactMap.get(positionAtList).getPostalCode() + "  " +
-                    "Miasto: " + contactMap.get(positionAtList).getCity() + "  " +
-                    "Ulica: " + contactMap.get(positionAtList).getStreet() + "  " +
-                    "Nr telefonu: " + contactMap.get(positionAtList).getPhoneNumber());
+            printContact(positionAtList, contactMap.get(positionAtList));
         } else {
             System.out.println("na tej pozycji w liście nie ma osoby o tym imieniu i nazwisku" +
                     System.lineSeparator() + "na pozycji z numerem " + positionAtList + "znajduje się: " +
@@ -69,59 +55,36 @@ public class ContactList {
     }
 
     public void addContact(String name, String surname, String country, String postalCode, String city, String streat, String phoneNumber) {
-        Parameters parametersTemp = new Parameters(name, surname, country, postalCode, city, streat, phoneNumber);
+        Person personTemp = new Person(name, surname, country, postalCode, city, streat, phoneNumber);
         if (contactMap.isEmpty()) {
             System.out.println("jest to pierwsza pozycja w mapie");
-            contactMap.put(0, parametersTemp);
-            System.out.println(0 + ") Imię: " + contactMap.get(0).getName() + "   " +
-                    "Nazwisko: " + contactMap.get(0).getSurname() + "  " +
-                    "Kraj: " + contactMap.get(0).getCountry() + "  " +
-                    "Kod pocztowy: " + contactMap.get(0).getPostalCode() + "  " +
-                    "Miasto: " + contactMap.get(0).getCity() + "  " +
-                    "Ulica: " + contactMap.get(0).getStreet() + "  " +
-                    "Nr telefonu: " + contactMap.get(0).getPhoneNumber());
+            contactMap.put(0, personTemp);
+            printContact(0, contactMap.get(0));
             sortList.selectionSort(contactMap);
             for (int i = 0; i < contactMap.size(); i++) {
-                if (contactMap.get(i) == parametersTemp) {
-                    System.out.println(i + ") Imię: " + contactMap.get(i).getName() + "   " +
-                            "Nazwisko: " + contactMap.get(i).getSurname() + "  " +
-                            "Kraj: " + contactMap.get(i).getCountry() + "  " +
-                            "Kod pocztowy: " + contactMap.get(i).getPostalCode() + "  " +
-                            "Miasto: " + contactMap.get(i).getCity() + "  " +
-                            "Ulica: " + contactMap.get(i).getStreet() + "  " +
-                            "Nr telefonu: " + contactMap.get(i).getPhoneNumber());
+                if (contactMap.get(i) == personTemp) {
+                    printContact(i, contactMap.get(i));
                 }
             }
 
         } else {
+            
             System.out.println("jak na razie lista ma  " + contactMap.size() + "pozycji(/e)");
-            contactMap.put(lastPosition, parametersTemp);
-            System.out.println(contactMap.size() + ") Imię: " + lastParameter.getName() + "   " +
-                    "Nazwisko: " + lastParameter.getSurname() + "  " +
-                    "Kraj: " + lastParameter.getCountry() + "  " +
-                    "Kod pocztowy: " + lastParameter.getPostalCode() + "  " +
-                    "Miasto: " + lastParameter.getCity() + "  " +
-                    "Ulica: " + lastParameter.getStreet() + "  " +
-                    "Nr telefonu: " + lastParameter.getPhoneNumber());
+            contactMap.put(contactMap.size(), personTemp);
             sortList.selectionSort(contactMap);
             for (int i = 0; i < contactMap.size(); i++) {
-                if (contactMap.get(i) == parametersTemp) {
-                    System.out.println(i + ") Imię: " + contactMap.get(i).getName() + "   " +
-                            "Nazwisko: " + contactMap.get(i).getSurname() + "  " +
-                            "Kraj: " + contactMap.get(i).getCountry() + "  " +
-                            "Kod pocztowy: " + contactMap.get(i).getPostalCode() + "  " +
-                            "Miasto: " + contactMap.get(i).getCity() + "  " +
-                            "Ulica: " + contactMap.get(i).getStreet() + "  " +
-                            "Nr telefonu: " + contactMap.get(i).getPhoneNumber());
+                if (contactMap.get(i) == personTemp) {
+                    printContact(i, contactMap.get(i));
                 }
             }
 
         }
     }
 
+
     public void erazeContact(Integer positionAtList, String name, String surname) {
         if (contactMap.get(positionAtList).getName().equals(name) && contactMap.get(positionAtList).getSurname().equals(surname)) {
-            Map<Integer, Parameters> contactListTemp = contactMap;
+            Map<Integer, Person> contactListTemp = contactMap;
             contactMap = new HashMap<>();
             for (int i = 0; i < contactListTemp.size() - 1; i++) {
                 if (i < positionAtList) {
@@ -139,20 +102,25 @@ public class ContactList {
 
     public void editContact(Integer positionAtList, String name, String surname, String country, String postalCode, String city, String streat, String phoneNumber) {
         if (contactMap.get(positionAtList).getName().equals(name) && contactMap.get(positionAtList).getSurname().equals(surname)) {
-            contactMap.replace(positionAtList, new Parameters(name, surname, country, postalCode, city, streat, phoneNumber));
+            contactMap.replace(positionAtList, new Person(name, surname, country, postalCode, city, streat, phoneNumber));
             System.out.println("Żądany kontakt został zmoyfikowany z listy, by to sprawdzić proszę wyświetlić całą listę " +
                     System.lineSeparator() + "Zmodyfikowany kontakt teraz to:" + System.lineSeparator());
-            System.out.println(positionAtList + ") Imię: " + contactMap.get(positionAtList).getName() + "   " +
-                    "Nazwisko: " + contactMap.get(positionAtList).getSurname() + "  " +
-                    "Kraj: " + contactMap.get(positionAtList).getCountry() + "  " +
-                    "Kod pocztowy: " + contactMap.get(positionAtList).getPostalCode() + "  " +
-                    "Miasto: " + contactMap.get(positionAtList).getCity() + "  " +
-                    "Ulica: " + contactMap.get(positionAtList).getStreet() + "  " +
-                    "Nr telefonu: " + contactMap.get(positionAtList).getPhoneNumber());
+            printContact(positionAtList, contactMap.get(positionAtList));
 
         } else {
             System.out.println("Wpisane dane nie identyfikują żadnego kontaktu z listy");
         }
         //sortList.selectionSort(contactMap);
     }
+
+    private void printContact(int i, Person person) {
+        System.out.println(i + ") Imię: " + person.getName() + "   " +
+                "Nazwisko: " + person.getSurname() + "  " +
+                "Kraj: " + person.getCountry() + "  " +
+                "Kod pocztowy: " + person.getPostalCode() + "  " +
+                "Miasto: " + person.getCity() + "  " +
+                "Ulica: " + person.getStreet() + "  " +
+                "Nr telefonu: " + person.getPhoneNumber());
+    }
 }
+
